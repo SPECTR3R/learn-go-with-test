@@ -28,7 +28,7 @@ func assertScoreEquals(t *testing.T, got, want int) {
 }
 
 func TestFileSystemStorage(t *testing.T) {
-	t.Run("test GetLeague", func(t *testing.T) {
+	t.Run("test GetLeague sorted by wins", func(t *testing.T) {
 		database, cleanDatabase := createTempFile(t,
 			`[
 				{"Name": "Cleo", "Wins": 10},
@@ -42,9 +42,11 @@ func TestFileSystemStorage(t *testing.T) {
 		got := store.GetLeague()
 
 		want := League{
-			{"Cleo", 10},
 			{"Chris", 33},
+			{"Cleo", 10},
 		}
+		assertLeague(t, got, want)
+		got = store.GetLeague()
 		assertLeague(t, got, want)
 	})
 	t.Run("get player score", func(t *testing.T) {
