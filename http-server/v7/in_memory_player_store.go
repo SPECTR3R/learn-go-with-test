@@ -16,8 +16,8 @@ func (i *InMemoryPlayerStore) GetPlayerScore(name string) int {
 	return i.store[name]
 }
 
-func (i *InMemoryPlayerStore) GetLeague() []Player {
-	var league []Player
+func (i *InMemoryPlayerStore) GetLeague() League {
+	var league League
 	for name, wins := range i.store {
 		league = append(league, Player{name, wins})
 	}

@@ -40,7 +40,7 @@ func TestFileSystemStorage(t *testing.T) {
 		store := FileSystemPlayerStore{database}
 		got := store.GetLeague()
 
-		want := []Player{
+		want := League{
 			{"Cleo", 10},
 			{"Chris", 33},
 		}
