@@ -5,11 +5,7 @@ import (
 )
 
 type FileSystemPlayerStore struct {
-	database io.ReadSeeker
-}
-
-type ReadSeeker interface {
-	Seeker
+	database io.ReadWriteSeeker
 }
 
 type Seeker interface {
