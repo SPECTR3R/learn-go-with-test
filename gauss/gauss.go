@@ -2,11 +2,11 @@ package main
 
 import (
 	"errors"
+	"fmt"
 	"math"
 )
 
-// result from above test case turns out to be correct to this tolerance.
-const ε = 1e-14
+
 
 func GaussPartial(a0 [][]float64, b0 []float64) ([]float64, error) {
 	// make augmented matrix
@@ -41,6 +41,7 @@ func GaussPartial(a0 [][]float64, b0 []float64) ([]float64, error) {
 				max = abs
 			}
 		}
+		fmt.Println(a)
 		if a[iMax][k] == 0 {
 			return nil, errors.New("singular")
 		}
@@ -51,6 +52,7 @@ func GaussPartial(a0 [][]float64, b0 []float64) ([]float64, error) {
 			}
 			a[i][k] = 0
 		}
+		fmt.Println(a)
 	} // end of WP algorithm.
 
 	// now back substitute to get result.

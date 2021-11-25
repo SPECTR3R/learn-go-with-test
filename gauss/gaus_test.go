@@ -15,6 +15,8 @@ type testCase struct {
 }
 
 // result from above test case turns out to be correct to this tolerance.
+const ε = 1e-14
+
 func TestWalk(t *testing.T) {
 	cases := []testCase{
 
