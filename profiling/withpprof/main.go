@@ -6,16 +6,20 @@ import (
 	"image/png"
 	"log"
 	"os"
+	"runtime/pprof"
 )
 
 const (
 	output     = "output.png"
-	width      = 1080
-	height     = 720
+	width      = 2048
+	height     = 2048
 	complexity = 4
 )
 
 func main() {
+	pprof.StartCPUProfile(os.Stdout)
+	defer pprof.StopCPUProfile()
+
 	f, err := os.Create("out.png")
 	if err != nil {
 		log.Fatal(err)
@@ -36,20 +40,6 @@ func create(width, height int) image.Image {
 	}
 	return m
 }
-
-// func pixel(i, j, width, height int) color.Color {
-// 	xi := norm(i, width, -1, 2)
-// 	yi := norm(j, height, -1, 1)
-
-// 	const maxI = 1000
-// 	x, y := 0., 0.
-
-// 	for i := 0; x*x-y*y < complexity && i < maxI; i++ {
-// 		x, y = x*x-y*y+xi, 2*x*y+yi
-// 	}
-
-// 	return color.Gray{uint8(x)}
-// }
 
 func pixel(i, j, width, height int) color.Color {
 	xi := norm(i, width, -1.0, 2)
