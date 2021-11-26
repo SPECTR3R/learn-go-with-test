@@ -1,4 +1,4 @@
-run
+# Trace commands
 
 ```bash
 go build -o mandlebrot
