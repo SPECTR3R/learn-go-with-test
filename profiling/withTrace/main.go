@@ -13,7 +13,7 @@ const (
 	output     = "output.png"
 	width      = 2048
 	height     = 2048
-	complexity = 4
+	complexity = 1024
 )
 
 func main() {

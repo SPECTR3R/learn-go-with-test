@@ -7,6 +7,7 @@ import (
 	"log"
 	"os"
 	"runtime/trace"
+	"sync"
 )
 
 const (
@@ -33,11 +34,17 @@ func main() {
 
 func create(width, height int) image.Image {
 	m := image.NewGray(image.Rect(0, 0, width, height))
+	var w sync.WaitGroup
+	w.Add(width)
 	for i := 0; i < width; i++ {
-		for j := 0; j < height; j++ {
-			m.Set(i, j, pixel(i, j, width, height))
-		}
+		go func(i int) {
+			for j := 0; j < height; j++ {
+				m.Set(i, j, pixel(i, j, width, height))
+			}
+			w.Done()
+		}(i)
 	}
+	w.Wait()
 	return m
 }
 
